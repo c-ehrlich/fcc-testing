@@ -71,16 +71,22 @@ suite("Functional Tests", function () {
   });
 });
 
-// const Browser = require('zombie');
+const Browser = require('zombie');
+Browser.site = 'https://fcc-testing.herokuapp.com/';
 
-// suite('Functional Tests with Zombie.js', function () {
-//   this.timeout(5000);
+suite('Functional Tests with Zombie.js', function () {
+  const browser = new Browser();
+  suiteSetup((done) => {
+    return browser.visit('/', done);
+  })
 
-//   suite('Headless browser', function () {
-//     test('should have a working "site" property', function() {
-//       assert.isNotNull(browser.site);
-//     });
-//   });
+  this.timeout(5000);
+
+  suite('Headless browser', function () {
+    test('should have a working "site" property', function() {
+      assert.isNotNull(browser.site);
+    });
+  });
 
 //   suite('"Famous Italian Explorers" form', function () {
 //     // #5
@@ -96,4 +102,4 @@ suite("Functional Tests", function () {
 //       done();
 //     });
 //   });
-// });
+});
